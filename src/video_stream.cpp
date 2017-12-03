@@ -130,7 +130,7 @@ int main(int argc, char** argv)
     //sensor_msg/encoding type  
     std::string msg_encoding;
     _nh.param("msg_encoding", camera_name, std::string("bgr8"));
-    ROS_INFO_STREAM("Encoding: " << encoding);
+    ROS_INFO_STREAM("Encoding: " << msg_encoding);
 
   
     int width_target;
