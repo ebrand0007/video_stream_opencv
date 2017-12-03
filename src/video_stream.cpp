@@ -126,7 +126,13 @@ int main(int argc, char** argv)
     bool flip_vertical;
     _nh.param("flip_vertical", flip_vertical, false);
     ROS_INFO_STREAM("Flip vertical image is: " << ((flip_vertical)?"true":"false"));
+ 
+    //sensor_msg/encoding type  
+    std::string msg_encoding;
+    _nh.param("msg_encoding", camera_name, std::string("bgr8"));
+    ROS_INFO_STREAM("Encoding: " << encoding);
 
+  
     int width_target;
     int height_target;
     _nh.param("width", width_target, 0);
@@ -179,7 +185,7 @@ int main(int argc, char** argv)
                 // Flip the image if necessary
                 if (flip_image)
                     cv::flip(frame, frame, flip_value);
-                msg = cv_bridge::CvImage(header, "bgr8", frame).toImageMsg();
+                msg = cv_bridge::CvImage(header, msg_encoding, frame).toImageMsg();
                 // Create a default camera info if we didn't get a stored one on initialization
                 if (cam_info_msg.distortion_model == ""){
                     ROS_WARN_STREAM("No calibration file given, publishing a reasonable default camera info.");
