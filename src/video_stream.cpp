@@ -129,7 +129,7 @@ int main(int argc, char** argv)
  
     //sensor_msg/encoding type  
     std::string msg_encoding;
-    nh.param("msg_encoding", msg_encoding, std::string("bgr8"));
+    _nh.param("msg_encoding", msg_encoding, std::string("bgr8"));
     ROS_INFO_STREAM("Encoding: " << msg_encoding);
 
   
