@@ -9,16 +9,17 @@
   	<!-- By default, calibrations are stored to file://${ROS_HOME}/camera_info/${NAME}.yaml
   	To use your own fill this arg with the corresponding url, e.g.:
   	"file:///$(find your_camera_package)/config/your_camera.yaml" -->
-    <arg name="camera_info_url" default="" />
+        <arg name="camera_info_url" default="" />
   	<!-- flip the image horizontally (mirror it) -->
   	<arg name="flip_horizontal" default="false" />
   	<!-- flip the image vertically -->
   	<arg name="flip_vertical" default="false" />
-    <!-- force width and height, 0 means no forcing -->
-    <arg name="width" default="0"/>
-    <arg name="height" default="0"/>
+        <!-- force width and height, 0 means no forcing -->
+        <arg name="width" default="0"/>
+        <arg name="height" default="0"/>
   	<!-- if show a image_view window subscribed to the generated stream -->
 	<arg name="visualize" default="false"/>
+        <arg name="msg_encoding" default="bgr8"/>
 
    
    	<!-- images will be published at /camera_name/image with the image transports plugins (e.g.: compressed) installed -->
@@ -34,6 +35,7 @@
 	        <param name="flip_vertical" type="bool" value="$(arg flip_vertical)" />
 	        <param name="width" type="int" value="$(arg width)" />
 	        <param name="height" type="int" value="$(arg height)" />
+                <param name="msg_encoding" type="string" value="$(arg msg_encoding)" />
 	    </node>
 
 	    <node if="$(arg visualize)" name="$(arg camera_name)_image_view" pkg="image_view" type="image_view">
