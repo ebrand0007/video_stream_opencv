@@ -205,7 +205,8 @@ int main(int argc, char** argv)
       //display new  image format
       ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
     }
-    catch (cv_bridge::Exception &e)
+    //catch (cv_bridge::Exception &e)
+    catch (ros:Exception &e)
     {
       ROS_INFO_STREAM("Failed  message: %s" << e.what());
       //ROS_ERROR("Failed  message: %s", e.what());
