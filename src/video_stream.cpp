@@ -73,7 +73,7 @@ sensor_msgs::CameraInfo get_default_camera_info_from_image(sensor_msgs::ImagePtr
 }
 
 
-string getImgType(int imgTypeInt)
+/**string getImgType(int imgTypeInt)
 {
     int numImgTypes = 35; // 7 base types, with five channel options each (none or C1, ..., C4)
 
@@ -99,7 +99,7 @@ string getImgType(int imgTypeInt)
     }
     return "unknown image type";
 }
-
+*/
 
 int main(int argc, char** argv)
 {
@@ -193,6 +193,7 @@ int main(int argc, char** argv)
     }
 
     //display native image format
+    ROS_INFO_STREAM("Raw video format: " << cap.get(CAP_PROP_FORMAT) );
     ROS_INFO_STREAM("Raw video format: " << cap.get(CAP_PROP_FORMAT) );
     //ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
     
