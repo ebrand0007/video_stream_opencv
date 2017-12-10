@@ -191,17 +191,25 @@ int main(int argc, char** argv)
         cap.set(CV_CAP_PROP_FRAME_WIDTH, width_target);
         cap.set(CV_CAP_PROP_FRAME_HEIGHT, height_target);
     }
-
-    //display native image format
-    ROS_INFO_STREAM("Raw video format: "  );
-    ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
-    //ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
+   
+    try
+    {
+      //display native image format
+      ROS_INFO_STREAM("Raw video format: "  );
+      ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
+      //ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
     
-    //set image format
-    cap.set(CV_CAP_PROP_FORMAT, CV_16UC1); //msg_encoding); //TODO; convert string to const
+      //set image format
+      cap.set(CV_CAP_PROP_FORMAT, CV_16UC1); //msg_encoding); //TODO; convert string to const
 
-    //display new  image format
-    ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
+      //display new  image format
+      ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
+    }
+    catch (Exception &e)
+    {
+      ROS_ERROR("Failed  message: %s", e.what());
+      return;
+    }
 
     ROS_INFO_STREAM("Opened the stream, starting to publish.");
 
