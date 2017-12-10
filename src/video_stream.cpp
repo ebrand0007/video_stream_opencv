@@ -208,7 +208,7 @@ int main(int argc, char** argv)
     catch (cv_bridge::Exception &e)
     {
       ROS_ERROR("Failed  message: %s", e.what());
-      return;
+      return(1);
     }
 
     ROS_INFO_STREAM("Opened the stream, starting to publish.");
