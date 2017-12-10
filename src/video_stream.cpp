@@ -197,7 +197,7 @@ int main(int argc, char** argv)
     //ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
     
     //set image format
-    cap.set(CV_CAP_PROP_FORMAT,msg_encoding)
+    cap.set(CV_CAP_PROP_FORMAT,msg_encoding);
 
     //display new  image format
     ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
