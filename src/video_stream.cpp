@@ -42,6 +42,7 @@
 #include <cv_bridge/cv_bridge.h>
 #include <sstream>
 #include <boost/assign/list_of.hpp>
+#include <string>
 
 // Based on the ros tutorial on transforming opencv images to Image messages
 
@@ -73,7 +74,7 @@ sensor_msgs::CameraInfo get_default_camera_info_from_image(sensor_msgs::ImagePtr
 }
 
 
-/**string getImgType(int imgTypeInt)
+std::string getImgType(int imgTypeInt)
 {
     int numImgTypes = 35; // 7 base types, with five channel options each (none or C1, ..., C4)
 
@@ -85,7 +86,7 @@ sensor_msgs::CameraInfo get_default_camera_info_from_image(sensor_msgs::ImagePtr
                              CV_32F, CV_32FC1, CV_32FC2, CV_32FC3, CV_32FC4,
                              CV_64F, CV_64FC1, CV_64FC2, CV_64FC3, CV_64FC4};
 
-    string enum_strings[] = {"CV_8U",  "CV_8UC1",  "CV_8UC2",  "CV_8UC3",  "CV_8UC4",
+    std::string enum_strings[] = {"CV_8U",  "CV_8UC1",  "CV_8UC2",  "CV_8UC3",  "CV_8UC4",
                              "CV_8S",  "CV_8SC1",  "CV_8SC2",  "CV_8SC3",  "CV_8SC4",
                              "CV_16U", "CV_16UC1", "CV_16UC2", "CV_16UC3", "CV_16UC4",
                              "CV_16S", "CV_16SC1", "CV_16SC2", "CV_16SC3", "CV_16SC4",
@@ -99,7 +100,6 @@ sensor_msgs::CameraInfo get_default_camera_info_from_image(sensor_msgs::ImagePtr
     }
     return "unknown image type";
 }
-*/
 
 int main(int argc, char** argv)
 {
@@ -193,6 +193,7 @@ int main(int argc, char** argv)
     }
 
     //display native image format
+    ROS_INFO_STREAM("Raw video format: "  );
     ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
     //ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
     
