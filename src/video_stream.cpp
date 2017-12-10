@@ -210,7 +210,7 @@ int main(int argc, char** argv)
     {
       ROS_INFO_STREAM("Failed  message: %s" << e.what());
       //ROS_ERROR("Failed  message: %s", e.what());
-      return(1);
+      //return(1);
     }
 
     ROS_INFO_STREAM("Opened the stream, starting to publish.");
