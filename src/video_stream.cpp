@@ -130,8 +130,6 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    //display native image format
-    ROS_INFO_STREAM("Video format: " << getImgType(cap.type()) );
 
     std::string camera_name;
     _nh.param("camera_name", camera_name, std::string("camera"));
@@ -160,7 +158,7 @@ int main(int argc, char** argv)
     //sensor_msg/encoding type  
     std::string msg_encoding;
     _nh.param("msg_encoding", msg_encoding, std::string("bgr8"));
-    ROS_INFO_STREAM("Encoding: " << msg_encoding);
+    ROS_INFO_STREAM("Ros message encoding: " << msg_encoding);
 
   
     int width_target;
@@ -194,6 +192,15 @@ int main(int argc, char** argv)
         cap.set(CV_CAP_PROP_FRAME_HEIGHT, height_target);
     }
 
+    //display native image format
+    ROS_INFO_STREAM("Raw video format: " << cap.get(CAP_PROP_FORMAT) );
+    //ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
+    
+    //set image format
+    cap.set(CAP_PROP_FORMAT,msg_encoding)
+
+    //display new  image format
+    ROS_INFO_STREAM("Raw video format: " << cap.get(CAP_PROP_FORMAT) );
 
     ROS_INFO_STREAM("Opened the stream, starting to publish.");
 
