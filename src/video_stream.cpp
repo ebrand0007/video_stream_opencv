@@ -196,7 +196,7 @@ int main(int argc, char** argv)
     {
       //display native image format
       ROS_INFO_STREAM("Raw video format: "  );
-      ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
+      //ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
       //ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
     
       //set image format
@@ -209,7 +209,7 @@ int main(int argc, char** argv)
     catch (ros::Exception &e)
     {
       ROS_INFO_STREAM("Failed  message: %s" << e.what());
-      //ROS_ERROR("Failed  message: %s", e.what());
+      ROS_ERROR("Failed  message: %s", e.what());
       //return(1);
     }
 
