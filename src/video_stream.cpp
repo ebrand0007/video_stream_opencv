@@ -207,7 +207,7 @@ int main(int argc, char** argv)
     }
     catch (cv_bridge::Exception &e)
     {
-      ROS_INFO_STREAM("Failed  message: %s", e.what());
+      ROS_INFO_STREAM("Failed  message: %s" << e.what());
       //ROS_ERROR("Failed  message: %s", e.what());
       return(1);
     }
