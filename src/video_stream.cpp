@@ -245,7 +245,7 @@ int main(int argc, char** argv)
             ROS_INFO_STREAM("Raw Video Stream Image type: " << imgFmt);
             //TODO: set to grescale
             cv::cvtColor(frame, frame_gray, cv::COLOR_BGR2GRAY);
-            ROS_INFO_STREAM("Gray Video Stream Image type: " << getImgType(frame_gray.type()););
+            //ROS_INFO_STREAM("Gray Video Stream Image type: " << getImgType(frame_gray.type()););
             
         }    
 
