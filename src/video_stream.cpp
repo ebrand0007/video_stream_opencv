@@ -43,6 +43,7 @@
 #include <sstream>
 #include <boost/assign/list_of.hpp>
 #include <string>
+#include <iostream>
 
 // Based on the ros tutorial on transforming opencv images to Image messages
 
@@ -254,7 +255,7 @@ int main(int argc, char** argv)
             {
               //ROS_INFO_STREAM("Failed  message: " << e.what());
               //ROS_ERROR("Failed  message: %s", e.what());
-              cout << e.what() << endl;
+              std::cout << e.what() << endl;
               ros::spinOnce(); 
               //return(1);
            }
