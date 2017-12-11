@@ -187,6 +187,8 @@ int main(int argc, char** argv)
         ROS_ERROR_STREAM("Could not open the stream.");
         return -1;
     }
+ 
+    //TODO: move try block to here
     if (width_target != 0 && height_target != 0){
         cap.set(CV_CAP_PROP_FRAME_WIDTH, width_target);
         cap.set(CV_CAP_PROP_FRAME_HEIGHT, height_target);
@@ -200,15 +202,15 @@ int main(int argc, char** argv)
       //ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
     
       //set image format
-      cap.set(CV_CAP_PROP_FORMAT, CV_16UC1); //msg_encoding); //TODO; convert string to const
+      //TODO: deletecap.set(CV_CAP_PROP_FORMAT, CV_16UC1); //msg_encoding); //TODO; convert string to const
 
       //display new  image format
-      ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
+      //TOOD: delete ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
     }
     //catch (cv_bridge::Exception &e)
     catch (ros::Exception &e)
     {
-      ROS_INFO_STREAM("Failed  message: %s" << e.what());
+      ROS_INFO_STREAM("Failed  message: " << e.what());
       ROS_ERROR("Failed  message: %s", e.what());
       //return(1);
     }
@@ -224,9 +226,18 @@ int main(int argc, char** argv)
     // Get the saved camera info if any
     cam_info_msg = cam_info_manager.getCameraInfo();
 
+    //TODO: lets grab one image from the stream to get the encoding type
+    cap>>frame;
+        if(!frame.empty()) 
+        {
+            std::string imgFmt=getImgType(frame.type());
+            ROS_INFO_STREAM("Video Stream Image type: ",imgFmt);
+        }    
+
     ros::Rate r(fps);
-    while (nh.ok()) {
-        cap >> frame;
+    while (nh.ok()) { // TODO: should also have cap.isOpened? 
+        cap >> frame; //same as cap.read(frame)
+                     // which does cap.grab , then cap.retrieve and 
         if (pub.getNumSubscribers() > 0){
             // Check if grabbed frame is actually full with some content
             if(!frame.empty()) {
