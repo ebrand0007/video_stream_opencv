@@ -252,8 +252,9 @@ int main(int argc, char** argv)
             }
             catch (ros::Exception &e)
             {
-              ROS_INFO_STREAM("Failed  message: " << e.what());
-              ROS_ERROR("Failed  message: %s", e.what());
+              //ROS_INFO_STREAM("Failed  message: " << e.what());
+              //ROS_ERROR("Failed  message: %s", e.what());
+              cout << e.what() << endl;
               ros::spinOnce(); 
               //return(1);
            }
