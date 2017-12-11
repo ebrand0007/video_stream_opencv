@@ -213,6 +213,8 @@ int main(int argc, char** argv)
           //https://stackoverflow.com/questions/27496698/opencv-capture-yuyv-from-camera-without-rgb-conversion 
           //https://docs.opencv.org/3.3.0/d4/d15/group__videoio__flags__base.html#gad0f42b32af0d89d2cee80dae0ea62b3d
           //https://docs.opencv.org/3.3.0/d4/d15/group__videoio__flags__base.html
+      // Boolean flags indicating whether images should be converted to RGB.
+      cap.set(CV_CAP_PROP_CONVERT_RGB, 0);
 
     }
     //catch (cv_bridge::Exception &e)
