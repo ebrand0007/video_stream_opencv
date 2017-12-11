@@ -206,6 +206,10 @@ int main(int argc, char** argv)
 
       //display new  image format
       //TOOD: delete ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
+
+      //TODO: CV_CAP_PROP_MODE is specific to kinect to being set to CV_CAP_MODE_YUYV
+      cap.set(CV_CAP_PROP_MODE, CV_CAP_MODE_YUYV); //https://stackoverflow.com/questions/27496698/opencv-capture-yuyv-from-camera-without-rgb-conversion 
+
     }
     //catch (cv_bridge::Exception &e)
     catch (ros::Exception &e)
