@@ -228,6 +228,7 @@ int main(int argc, char** argv)
     ROS_INFO_STREAM("Opened the stream, starting to publish.");
 
     cv::Mat frame;
+    av::Mat frame_gray;
     sensor_msgs::ImagePtr msg;
     sensor_msgs::CameraInfo cam_info_msg;
     std_msgs::Header header;
@@ -241,7 +242,11 @@ int main(int argc, char** argv)
         if(!frame.empty()) 
         {
             std::string imgFmt=getImgType(frame.type());
-            ROS_INFO_STREAM("Video Stream Image type: " << imgFmt);
+            ROS_INFO_STREAM("Raw Video Stream Image type: " << imgFmt);
+            //TODO: set to grescale
+            cv::cvtColor(frame, frame_gray, cv::COLOR_BGR2GRAY);
+            ROS_INFO_STREAM("Gray Video Stream Image type: " << getImgType(frame_gray.type()););
+            
         }    
 
     ros::Rate r(fps);
