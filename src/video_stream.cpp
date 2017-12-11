@@ -231,7 +231,7 @@ int main(int argc, char** argv)
         if(!frame.empty()) 
         {
             std::string imgFmt=getImgType(frame.type());
-            ROS_INFO_STREAM("Video Stream Image type: ",imgFmt);
+            ROS_INFO_STREAM("Video Stream Image type: " << imgFmt);
         }    
 
     ros::Rate r(fps);
