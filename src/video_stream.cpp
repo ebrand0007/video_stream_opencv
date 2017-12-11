@@ -209,12 +209,12 @@ int main(int argc, char** argv)
 
       //TODO: CV_CAP_PROP_MODE is specific to kinect to being set to CV_CAP_MODE_YUYV
       //cap.set(CV_CAP_PROP_MODE, CV_CAP_MODE_YUYV); 
-      cap.set(CV_CAP_PROP_MODE, CV_CAP_MODE_GRAY);
+      //cap.set(CV_CAP_PROP_MODE, CV_CAP_MODE_GRAY);
           //https://stackoverflow.com/questions/27496698/opencv-capture-yuyv-from-camera-without-rgb-conversion 
           //https://docs.opencv.org/3.3.0/d4/d15/group__videoio__flags__base.html#gad0f42b32af0d89d2cee80dae0ea62b3d
           //https://docs.opencv.org/3.3.0/d4/d15/group__videoio__flags__base.html
       // Boolean flags indicating whether images should be converted to RGB.
-      cap.set(CV_CAP_PROP_CONVERT_RGB, 0);
+      //cap.set(CV_CAP_PROP_CONVERT_RGB, 0);
 
     }
     //catch (cv_bridge::Exception &e)
@@ -228,7 +228,7 @@ int main(int argc, char** argv)
     ROS_INFO_STREAM("Opened the stream, starting to publish.");
 
     cv::Mat frame;
-    cv::Mat frame_gray(width_target,height_target,CV_16UC1);
+    cv::Mat frame_gray; //TODO (width_target,height_target,CV_16UC1);
     sensor_msgs::ImagePtr msg;
     sensor_msgs::CameraInfo cam_info_msg;
     std_msgs::Header header;
