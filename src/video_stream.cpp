@@ -247,10 +247,10 @@ int main(int argc, char** argv)
             try
             {
                 cv::cvtColor(frame, frame_gray, CV_BGR2GRAY); //note opencv3 uses cv::COLOR_BGR2GRAY
-                ROS_INFO_STREAM("Gray Video Stream Image type: " << getImgType(frame_gray.type()););
+                ROS_INFO_STREAM("Gray Video Stream Image type: " << getImgType( frame_gray.type() ) );
             }
             catch
-           {
+            {
               ROS_INFO_STREAM("Failed  message: " << e.what());
               ROS_ERROR("Failed  message: %s", e.what());
               return(1);
