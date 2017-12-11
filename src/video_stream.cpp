@@ -228,7 +228,7 @@ int main(int argc, char** argv)
     ROS_INFO_STREAM("Opened the stream, starting to publish.");
 
     cv::Mat frame;
-    av::Mat frame_gray;
+    cv::Mat frame_gray(width_target,height_target,CV_16UC1);
     sensor_msgs::ImagePtr msg;
     sensor_msgs::CameraInfo cam_info_msg;
     std_msgs::Header header;
