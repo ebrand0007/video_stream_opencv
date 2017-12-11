@@ -239,17 +239,18 @@ int main(int argc, char** argv)
 
     //TODO: lets grab one image from the stream to get the encoding type
     cap>>frame;
-        if(!frame.empty()) 
+        if( !frame.empty() ) 
         {
             std::string imgFmt=getImgType(frame.type());
-            ROS_INFO_STREAM("Raw Video Stream Image type: " << imgFmt);
+            ROS_INFO_STREAM("Raw Video Stream Image type: " << imgFmt );
             //TODO: set to grescale
             try
             {
                 cv::cvtColor(frame, frame_gray, CV_BGR2GRAY); //note opencv3 uses cv::COLOR_BGR2GRAY
-                ROS_INFO_STREAM("Gray Video Stream Image type: " << getImgType( frame_gray.type() ) );
+                imgFmt=getImgType(frame_gray.type());
+                ROS_INFO_STREAM("Gray Video Stream Image type: " << imgFmt );
             }
-            catch
+            catch (ros::Exception &e)
             {
               ROS_INFO_STREAM("Failed  message: " << e.what());
               ROS_ERROR("Failed  message: %s", e.what());
