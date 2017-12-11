@@ -254,7 +254,8 @@ int main(int argc, char** argv)
             {
               ROS_INFO_STREAM("Failed  message: " << e.what());
               ROS_ERROR("Failed  message: %s", e.what());
-              return(1);
+              ros::spinOnce(); 
+              //return(1);
            }
       
             
