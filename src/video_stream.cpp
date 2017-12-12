@@ -229,7 +229,7 @@ int main(int argc, char** argv)
     ROS_INFO_STREAM("Opened the stream, starting to publish.");
 
     cv::Mat frame;
-    cv::Mat frame_16UC3((width_target,height_target,CV_16UC3);
+    cv::Mat frame_16UC3(width_target,height_target,CV_16UC3);
     cv::Mat frame_gray16UC1(width_target,height_target,CV_16UC1);
     sensor_msgs::ImagePtr msg;
     sensor_msgs::CameraInfo cam_info_msg;
