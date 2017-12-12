@@ -247,7 +247,7 @@ int main(int argc, char** argv)
             //TODO: set to grescale
             try
             {   
-                std::cout << "cvtColor format: " << CV_BGR2GRAY << std:endl;
+                std::cout << "cvtColor format: " << CV_BGR2GRAY << std::endl;
                 cv::cvtColor(frame, frame_gray, CV_BGR2GRAY ); //note opencv3 uses cv::COLOR_BGR2GRAY
                 imgFmt=getImgType(frame_gray.type());
                 ROS_INFO_STREAM("Gray Video Stream Image type: " << imgFmt );
