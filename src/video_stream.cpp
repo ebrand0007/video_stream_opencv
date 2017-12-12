@@ -283,8 +283,32 @@ int main(int argc, char** argv)
                 // Flip the image if necessary
                 if (flip_image)
                     cv::flip(frame, frame, flip_value);
-                //msg = cv_bridge::CvImage(header, msg_encoding, frame).toImageMsg();
-                msg = cv_bridge::CvImage(header, msg_encoding, frame_gray16UC1).toImageMsg();
+
+
+                // convert 8UC3 to needed  depthimage grescale input format 16UC1
+                //TODO: if type =8U*, then
+                try
+                {  
+                  //change 8 bit depth to 16
+                  //https://github.com/ros-perception/vision_opencv/blob/kinetic/cv_bridge/src/cv_bridge.cpp#L331
+                  //http://docs.ros.org/kinetic/api/sensor_msgs/html/image__encodings_8h_source.html
+                  frame.convertTo(frame_16UC3,CV_16UC3,65535. / 255.);
+                  
+                  //Now Convert to single channel
+                  cv::cvtColor(frame_16UC3, frame_gray16UC1, CV_BGR2GRAY ); //note opencv3 uses cv::COLOR_BGR2GRAY
+                  //msg = cv_bridge::CvImage(header, msg_encoding, frame).toImageMsg();
+                  msg = cv_bridge::CvImage(header, msg_encoding, frame_gray16UC1).toImageMsg();
+                
+                }
+                catch (ros::Exception &e)
+                {
+                  ROS_INFO_STREAM("Failed  message: " << e.what());
+                  //ROS_ERROR("Failed  message: %s", e.what());
+                  std::cout << "Error: " << e.what() << std::endl;
+                  ros::spinOnce(); 
+                  return(1);
+                }
+
                 // Create a default camera info if we didn't get a stored one on initialization
                 if (cam_info_msg.distortion_model == ""){
                     ROS_WARN_STREAM("No calibration file given, publishing a reasonable default camera info.");
