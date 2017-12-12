@@ -246,16 +246,17 @@ int main(int argc, char** argv)
             ROS_INFO_STREAM("Raw Video Stream Image type: " << imgFmt );
             //TODO: set to grescale
             try
-            {
-                cv::cvtColor(frame, frame_gray, CV_BGR2GRAY); //note opencv3 uses cv::COLOR_BGR2GRAY
-                imgFmt=getImgType(frame_gray.type());
+            {   
+                std::cout << "cvtColor format: " << COLOR_BGR2GRAY << std:endl;
+                //cv::cvtColor(frame, frame_gray, COLOR_BGR2GRAY); //note opencv3 uses cv::COLOR_BGR2GRAY
+                //imgFmt=getImgType(frame_gray.type());
                 ROS_INFO_STREAM("Gray Video Stream Image type: " << imgFmt );
             }
             catch (ros::Exception &e)
             {
               //ROS_INFO_STREAM("Failed  message: " << e.what());
               //ROS_ERROR("Failed  message: %s", e.what());
-              std::cout << e.what() << std::endl;
+              std::cout "Error: " << e.what() << std::endl;
               ros::spinOnce(); 
               //return(1);
            }
