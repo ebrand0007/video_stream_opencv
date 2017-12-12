@@ -213,7 +213,7 @@ int main(int argc, char** argv)
       //cap.set(CV_CAP_PROP_MODE, CV_CAP_MODE_GRAY);
           //https://stackoverflow.com/questions/27496698/opencv-capture-yuyv-from-camera-without-rgb-conversion 
           //https://docs.opencv.org/3.3.0/d4/d15/group__videoio__flags__base.html#gad0f42b32af0d89d2cee80dae0ea62b3d
-          //https://docs.opencv.org/3.3.0/d4/d15/group__videoio__flags__base.html
+          //http://docs.ros.org/kinetic/api/sensor_msgs/html/image__encodings_8h_source.html
       // Boolean flags indicating whether images should be converted to RGB.
       //cap.set(CV_CAP_PROP_CONVERT_RGB, 0);
 
@@ -251,6 +251,7 @@ int main(int argc, char** argv)
                 //TODO: if type =8U*, then
                   //change 8 bit depth to 16
                   //https://github.com/ros-perception/vision_opencv/blob/kinetic/cv_bridge/src/cv_bridge.cpp#L331
+                  //http://docs.ros.org/kinetic/api/sensor_msgs/html/image__encodings_8h_source.html
                   frame.convertTo(frame_16UC3,CV_16UC3,65535. / 255.);
                   imgFmt=getImgType(frame_16UC3.type());
                   ROS_INFO_STREAM("frame_16UC3 Video Stream Image type: " << imgFmt );
@@ -282,7 +283,8 @@ int main(int argc, char** argv)
                 // Flip the image if necessary
                 if (flip_image)
                     cv::flip(frame, frame, flip_value);
-                msg = cv_bridge::CvImage(header, msg_encoding, frame).toImageMsg();
+                //msg = cv_bridge::CvImage(header, msg_encoding, frame).toImageMsg();
+                msg = cv_bridge::CvImage(header, msg_encoding, frame_gray16UC1).toImageMsg();
                 // Create a default camera info if we didn't get a stored one on initialization
                 if (cam_info_msg.distortion_model == ""){
                     ROS_WARN_STREAM("No calibration file given, publishing a reasonable default camera info.");
