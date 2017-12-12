@@ -229,7 +229,8 @@ int main(int argc, char** argv)
     ROS_INFO_STREAM("Opened the stream, starting to publish.");
 
     cv::Mat frame;
-    cv::Mat frame_gray(width_target,height_target,CV_16UC1);
+    cv::Mat frame_16UC3((width_target,height_target,CV_16UC3);
+    cv::Mat frame_gray16UC1(width_target,height_target,CV_16UC1);
     sensor_msgs::ImagePtr msg;
     sensor_msgs::CameraInfo cam_info_msg;
     std_msgs::Header header;
@@ -246,11 +247,18 @@ int main(int argc, char** argv)
             ROS_INFO_STREAM("Raw Video Stream Image type: " << imgFmt );
             //TODO: set to grescale
             try
-            {   
-                std::cout << "cvtColor format: " << CV_BGR2GRAY << std::endl;
-                cv::cvtColor(frame, frame_gray, CV_BGR2GRAY ); //note opencv3 uses cv::COLOR_BGR2GRAY
-                imgFmt=getImgType(frame_gray.type());
-                ROS_INFO_STREAM("Gray Video Stream Image type: " << imgFmt );
+            {  
+                //TODO: if type =8U*, then
+                  //change 8 bit depth to 16
+                  //https://github.com/ros-perception/vision_opencv/blob/kinetic/cv_bridge/src/cv_bridge.cpp#L331
+                  frame.convertTo(frame_16UC3,CV_16UC3,65535. / 255.);
+                  imgFmt=getImgType(frame_16UC3.type());
+                  ROS_INFO_STREAM("frame_16UC3 Video Stream Image type: " << imgFmt );
+                  //Convert to single channel
+                  cv::cvtColor(frame_16UC3, frame_gray16UC1, CV_BGR2GRAY ); //note opencv3 uses cv::COLOR_BGR2GRAY
+                  imgFmt=getImgType(frame_gray16UC1.type());
+                  ROS_INFO_STREAM("frame_gray16UC1 Video Stream Image type: " << imgFmt );
+                
             }
             catch (ros::Exception &e)
             {
