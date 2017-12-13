@@ -190,17 +190,22 @@ int main(int argc, char** argv)
     }
  
     //TODO: move try block to here
-    if (width_target != 0 && height_target != 0){
-        cap.set(CV_CAP_PROP_FRAME_WIDTH, width_target);
-        cap.set(CV_CAP_PROP_FRAME_HEIGHT, height_target);
-    }
    
     try
-    {
+    {  
+      //set width/height
+      if (width_target != 0 && height_target != 0){
+        cap.set(CV_CAP_PROP_FRAME_WIDTH, width_target);
+        cap.set(CV_CAP_PROP_FRAME_HEIGHT, height_target);
+      }
+      // set to monochrome
+      cap.set(CAP_PROP_MONOCHROME,1);
+      // Boolean flags indicating whether images should be converted to RGB.
+      cap.set(CV_CAP_PROP_CONVERT_RGB, 0);
+
       //display native image format
-      ROS_INFO_STREAM("Raw video format: "  );
-      //ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
-      //ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
+      ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
+      ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
     
       //set image format
       //TODO: deletecap.set(CV_CAP_PROP_FORMAT, CV_16UC1); //msg_encoding); //TODO; convert string to const
@@ -214,8 +219,6 @@ int main(int argc, char** argv)
           //https://stackoverflow.com/questions/27496698/opencv-capture-yuyv-from-camera-without-rgb-conversion 
           //https://docs.opencv.org/3.3.0/d4/d15/group__videoio__flags__base.html#gad0f42b32af0d89d2cee80dae0ea62b3d
           //http://docs.ros.org/kinetic/api/sensor_msgs/html/image__encodings_8h_source.html
-      // Boolean flags indicating whether images should be converted to RGB.
-      //cap.set(CV_CAP_PROP_CONVERT_RGB, 0);
 
     }
     //catch (cv_bridge::Exception &e)
@@ -223,7 +226,7 @@ int main(int argc, char** argv)
     {
       ROS_INFO_STREAM("Failed  message: " << e.what());
       ROS_ERROR("Failed  message: %s", e.what());
-      //return(1);
+      return(1);
     }
 
     ROS_INFO_STREAM("Opened the stream, starting to publish.");
