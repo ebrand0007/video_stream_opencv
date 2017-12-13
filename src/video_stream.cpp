@@ -199,7 +199,7 @@ int main(int argc, char** argv)
         cap.set(CV_CAP_PROP_FRAME_HEIGHT, height_target);
       }
       // set to monochrome
-      cap.set(CAP_PROP_MONOCHROME,1);
+      cap.set(CV_CAP_PROP_MONOCHROME,1);
       // Boolean flags indicating whether images should be converted to RGB.
       cap.set(CV_CAP_PROP_CONVERT_RGB, 0);
 
