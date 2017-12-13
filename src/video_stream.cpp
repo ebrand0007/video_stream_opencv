@@ -205,7 +205,7 @@ int main(int argc, char** argv)
 
       //display native image format
       ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
-      ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CAP_PROP_FORMAT)) );
+      ROS_INFO_STREAM("Video format: " << getImgType(cap.get(CV_CAP_PROP_FORMAT)) );
     
       //set image format
       //TODO: deletecap.set(CV_CAP_PROP_FORMAT, CV_16UC1); //msg_encoding); //TODO; convert string to const
