@@ -202,6 +202,7 @@ int main(int argc, char** argv)
       //cap.set(CV_CAP_PROP_MONOCHROME,1);
       // Boolean flags indicating whether images should be converted to RGB.
       cap.set(CV_CAP_PROP_CONVERT_RGB, 0);
+      cap.set(CV_CAP_PROP_MODE, CV_CAP_MODE_GRAY);
 
       //display native image format
       ROS_INFO_STREAM("Raw video format: " << cap.get(CV_CAP_PROP_FORMAT) );
